@@ -3,7 +3,7 @@
 Docker image containing [Python](https://www.python.org) + [Poetry](https://python-poetry.org).
 
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/dstockhammer/python-poetry?sort=semver)](https://hub.docker.com/r/dstockhammer/python-poetry)
-[![GitHub last commit](https://img.shields.io/github/last-commit/dstockhammer/docker-python-poetry)](https://github.com/dstockhammer/docker-python-poetry/commits/master)
+[![GitHub last commit](https://img.shields.io/github/last-commit/dstockhammer/docker-python-poetry)](https://github.com/dstockhammer/docker-python-poetry/commits/main)
 
 ## Usage
 

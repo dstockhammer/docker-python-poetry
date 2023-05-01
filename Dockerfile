@@ -11,5 +11,3 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_VERSION=1.4.2
 
 RUN pip install --no-cache-dir poetry==$POETRY_VERSION
-
-ENTRYPOINT [ "poetry" ]

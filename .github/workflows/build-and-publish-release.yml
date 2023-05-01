@@ -48,7 +48,7 @@ jobs:
           echo "poetry_semver_minor=$poetry_semver_minor" | tee -a $GITHUB_ENV
           echo "poetry_semver_patch=$poetry_semver_patch" | tee -a $GITHUB_ENV
 
-          echo "version=${python_semver_full}-${$poetry_semver_full}" | tee -a $GITHUB_ENV
+          echo "version=${python_semver_full}-${poetry_semver_full}" | tee -a $GITHUB_ENV
 
       - name: Check if the version tag already exists
         uses: mukunku/tag-exists-action@v1.2.0

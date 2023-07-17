@@ -1,4 +1,4 @@
-FROM python:3.11.4-slim
+FROM python:3.11.4
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
@@ -11,10 +11,6 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_VERSION=1.5.1 \
     PATH=$PATH:/opt/poetry/bin
 
-RUN apt-get update \
- && apt-get install -qq --yes --no-install-recommends \
-      build-essential \
- && rm -rf /var/lib/apt/lists/* \
- && python3 -m venv $POETRY_HOME \
+RUN python3 -m venv $POETRY_HOME \
  && $POETRY_HOME/bin/pip install --no-cache-dir \
       poetry==$POETRY_VERSION

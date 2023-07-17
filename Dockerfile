@@ -15,6 +15,3 @@ ENV PYTHONFAULTHANDLER=1 \
 RUN python3 -m venv $POETRY_HOME \
  && $POETRY_HOME/bin/pip install --no-cache-dir \
       poetry==$POETRY_VERSION
-
-ENTRYPOINT [ "poetry" ]
-CMD [ "--help" ]

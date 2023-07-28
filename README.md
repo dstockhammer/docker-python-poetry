@@ -12,6 +12,11 @@ FROM dstockhammer/python-poetry:3.11 AS builder
 
 WORKDIR /app
 
+ENV POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_OPTIONS_ALWAYS_COPY=1 \
+    POETRY_VIRTUALENVS_OPTIONS_NO_PIP=1 \
+    POETRY_VIRTUALENVS_OPTIONS_NO_SETUPTOOLS=1
+
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --only=main --no-root --no-ansi --no-interaction
 

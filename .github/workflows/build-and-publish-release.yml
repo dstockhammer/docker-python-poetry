@@ -28,9 +28,16 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
-      - name: Get versions from Dockerfile
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: python-poetry:latest
+
+      - name: Get versions
         run: |
-          python_semver_full=$(head -n1 Dockerfile | grep -oP '([0-9\.]+)')
+          python_semver_full=$(docker run --rm python-poetry python --version | grep -oP '([0-9\.]+)')
           python_semver_major=$(echo "$python_semver_full" | cut -d '.' -f1)
           python_semver_minor=$(echo "$python_semver_full" | cut -d '.' -f2)
           python_semver_patch=$(echo "$python_semver_full" | cut -d '.' -f3)
@@ -39,7 +46,7 @@ jobs:
           echo "python_semver_minor=$python_semver_minor" | tee -a $GITHUB_ENV
           echo "python_semver_patch=$python_semver_patch" | tee -a $GITHUB_ENV
 
-          poetry_semver_full=$(grep "POETRY_VERSION=" Dockerfile | grep -oP '([0-9\.]+)')
+          poetry_semver_full=$(docker run --rm python-poetry poetry --version | grep -oP '([0-9\.]+)')
           poetry_semver_major=$(echo "$poetry_semver_full" | cut -d '.' -f1)
           poetry_semver_minor=$(echo "$poetry_semver_full" | cut -d '.' -f2)
           poetry_semver_patch=$(echo "$poetry_semver_full" | cut -d '.' -f3)
@@ -57,13 +64,6 @@ jobs:
           tag: ${{ env.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          load: true
-          tags: python-poetry:latest
 
       - name: Test all required executables and build release body
         run: |
